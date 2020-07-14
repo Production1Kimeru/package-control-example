@@ -1,21 +1,16 @@
 gl.setup(NATIVE_WIDTH, NATIVE_HEIGHT)
 
-local on = false
+local font = resource.load_font "font.ttf"
+local text = "Hello World"
 
--- Listen to incoming UDP packets and parses them, so you can
--- easily dispatch them just by defining callback functions.
-util.data_mapper{
+util.json_watch("config.json", function(config)
+    -- called each time the configuration is changed. 'config'
+    -- contains new current configuration values set by the user.
 
-    -- Listen to the 'toggle' event sent from the hosted service
-    toggle = function(status)
-        on = status == "on"
-    end
-}
+    text = config.text -- assign configuration 'text' value to 'text' variable
+end)
 
 function node.render()
-    if on then
-        gl.clear(1,1,1,1)
-    else
-        gl.clear(0,0,0,1)
-    end
+    gl.clear(0,0,0,1)
+    font:write(250, 300, text, 64, 1,1,1,1) -- use the CONFIG value
 end
