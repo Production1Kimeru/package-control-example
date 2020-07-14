@@ -3,3 +3,13 @@
     "control_ui": "control.html",
     "options": []
 }
+
+{
+    "name": "Hello World Node",
+    "options": [{
+        "title": "Text",
+        "name": "text",
+        "type": "string",
+        "default": "Hello world"
+    }]
+}
